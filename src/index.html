@@ -73,6 +73,33 @@
     <!-- End of bodyEnd -->
 
 <script src="https://app.chatgptbuilder.io/webchat/plugin.js?v=5"></script><script>ktt10.setup({id:"BCCJM0geWNUZYUVml",accountId:"1656509",color:"#0B0B0B"})</script>
+
+  <script>
+  function clearChatUI() {
+    // This function clears the chat window
+    const chatWindow = document.querySelector('.webchat__chat-history');
+    if (chatWindow) {
+      chatWindow.innerHTML = '';
+    }
+  }
+
+  // Listen for the "Start Over" flow trigger
+  window.addEventListener('message', function(event) {
+    if (event.data && event.data.type === 'start_over') {
+      clearChatUI();
+    }
+  });
+
+  // Function to send a message to the parent window
+  function sendMessageToParent(type) {
+    window.parent.postMessage({ type: type }, '*');
+  }
+
+  // Trigger the "Start Over" flow when the persistent menu item is clicked
+  document.querySelector('.persistent-menu__item--start-over').addEventListener('click', function() {
+    sendMessageToParent('start_over');
+  });
+</script>
 </body>
 
 </html>
