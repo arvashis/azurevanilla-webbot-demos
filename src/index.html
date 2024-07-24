@@ -85,6 +85,7 @@
 
   // Listen for the "Start Over" flow trigger
   window.addEventListener('message', function(event) {
+    alert(event.data);
     if (event.data && event.data.type === 'start_over') {
       clearChatUI();
     }
